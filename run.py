@@ -20,4 +20,4 @@ irc.send(("".join(("PASS ", PASS, "\r\n"))).encode('utf-8'))
 irc.send(("".join(("NICK ", NICK, "\r\n"))).encode('utf-8'))
 irc.send(("".join(("JOIN ", CHAN, "\r\n"))).encode('utf-8'))
 
-ircMessage("Bot has connected")
+ircMessage("Bot has connected.")
