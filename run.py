@@ -1,5 +1,7 @@
 import configparser
-import socket
+from socket import socket
+from ircSocket import IRCSocket 
+
 
 #importing irc settings 
 config = configparser.ConfigParser()
@@ -11,13 +13,13 @@ PASS = config.get('irc','PASS')
 NICK = config.get('irc','NICK')
 CHAN = config.get('irc','CHAN')
 
-def ircMessage(message):
-    irc.send(("".join(("PRIVMSG ", CHAN, " :", message, "\r\n"))).encode('utf-8'))
+irc = IRCSocket(HOST,PORT,PASS,NICK)
+irc.setup(socket())
+irc.joinChannel(CHAN)
 
-irc = socket.socket()
-irc.connect((HOST,PORT))
-irc.send(("".join(("PASS ", PASS, "\r\n"))).encode('utf-8'))
-irc.send(("".join(("NICK ", NICK, "\r\n"))).encode('utf-8'))
-irc.send(("".join(("JOIN ", CHAN, "\r\n"))).encode('utf-8'))
+theBuffer = ""
+running = True
+while running:
+    running = irc.parseBuffer(theBuffer)
 
-ircMessage("Bot has connected.")
+print("success?")
